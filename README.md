@@ -6,15 +6,17 @@
 
 ## 快速开始
 
+从 [GitHub Releases](https://github.com/chen5544/mypet/releases) 下载最新安装包。
+
 ### macOS
 
-1. 下载 `dist/Cat Desktop Pet-1.0.0-mac-arm64.dmg`（Apple Silicon）或 `dist/Cat Desktop Pet-1.0.0-mac-x64.dmg`（Intel）
+1. 下载 `Cat Desktop Pet-1.0.0-mac-arm64.dmg`（Apple Silicon）或 `mac-x64.dmg`（Intel）
 2. 双击打开 DMG，将应用拖入 Applications
 3. 首次运行时，右键点击应用并选择「打开」，以绕过 Gatekeeper 限制
 
 ### Windows
 
-1. 下载 `dist/Cat Desktop Pet-1.0.0-win-x64.zip`
+1. 下载 `Cat Desktop Pet-1.0.0-win-x64.zip`
 2. 解压到任意目录
 3. 双击运行 `Cat Desktop Pet.exe`
 

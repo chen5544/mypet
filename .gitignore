@@ -1,7 +1,9 @@
 node_modules/
-dist/
 
-# Build output except icons needed for packaging
+# Build output except icons and installers
+build/*
+!build/icon.icns
+!build/icon.png
 build/*
 !build/icon.icns
 !build/icon.png
