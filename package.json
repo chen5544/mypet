@@ -1,0 +1,71 @@
+{
+  "name": "cat-desktop-pet",
+  "version": "1.0.0",
+  "description": "macOS Electron desktop pet driven by global mouse position.",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "preview": "vite --host 127.0.0.1 --port 5173",
+    "process:video": "node scripts/process-video.mjs",
+    "process:run": "node scripts/process-run-video.mjs run",
+    "process:eat": "node scripts/process-run-video.mjs eat",
+    "process:play": "node scripts/process-run-video.mjs play",
+    "process:jump": "node scripts/process-run-video.mjs jump",
+    "process:sleep": "node scripts/process-run-video.mjs sleep",
+    "process:walk-right": "node scripts/process-run-video.mjs walkRight",
+    "process:walk-left": "node scripts/process-run-video.mjs walkLeft",
+    "process:wash": "node scripts/process-run-video.mjs wash",
+    "validate": "node scripts/validate-assets.mjs",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win",
+    "dist:all": "electron-builder --mac --win"
+  },
+  "build": {
+    "appId": "com.cat-desktop-pet.app",
+    "productName": "Cat Desktop Pet",
+    "icon": "build/icon",
+    "files": [
+      "src/**/*",
+      "index.html",
+      "public/assets/sprites/**/*",
+      "public/assets/*-manifest.json",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.entertainment",
+      "target": [
+        { "target": "dmg", "arch": ["arm64", "x64"] },
+        { "target": "zip", "arch": ["arm64", "x64"] }
+      ],
+      "artifactName": "${productName}-${version}-mac-${arch}.${ext}"
+    },
+    "win": {
+      "target": [
+        { "target": "zip", "arch": ["x64"] }
+      ],
+      "artifactName": "${productName}-${version}-win-${arch}.${ext}"
+    }
+  },
+  "keywords": [
+    "electron",
+    "desktop-pet",
+    "cat"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "electron": "^37.10.3",
+    "electron-builder": "^26.15.3",
+    "ffmpeg-static": "^5.2.0",
+    "vite": "^7.0.0"
+  }
+}

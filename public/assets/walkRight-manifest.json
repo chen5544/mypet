@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-06-14T14:43:09.365Z",
+  "sourceVideo": "Mirrored from walkLeft_transparent_frames (Weixin Videos2026-06-14_223353_294.mp4)",
+  "sourceHasAlpha": false,
+  "alphaMethod": "Frames mirrored horizontally from walkLeft transparent frames.",
+  "frameCount": 241,
+  "assetFrameSize": {
+    "width": 512,
+    "height": 512
+  },
+  "sprite": {
+    "file": "sprites/cat-walkRight.png",
+    "columns": 13,
+    "rows": 19,
+    "frameWidth": 512,
+    "frameHeight": 512
+  },
+  "transparentFramesPattern": "walkRight_transparent_frames/walkRight_%04d.png"
+}

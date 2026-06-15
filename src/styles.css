@@ -1,0 +1,282 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: transparent;
+}
+
+.pet-root {
+  width: 100%;
+  height: 100%;
+}
+
+.pet-stage {
+  position: relative;
+  width: var(--pet-size, 280px);
+  height: var(--pet-size, 280px);
+}
+
+.cat-wrap {
+  position: absolute;
+  inset: 0;
+  width: var(--pet-size, 280px);
+  height: var(--pet-size, 280px);
+  opacity: 1;
+  transform: scale(1);
+  transform-origin: center bottom;
+  transition:
+    filter 220ms ease,
+    opacity 180ms ease,
+    transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.cat-frame {
+  position: absolute;
+  inset: 0;
+  width: var(--pet-size, 280px);
+  height: var(--pet-size, 280px);
+  background-repeat: no-repeat;
+  background-size: var(--sprite-size, 3640px) var(--sprite-size, 3640px);
+  image-rendering: auto;
+  opacity: 1;
+  pointer-events: none;
+  will-change: background-position, transform;
+}
+
+.pet-root[data-action-state="eat"] .cat-wrap {
+  transform: translateY(-32%) scale(0.6);
+}
+
+.pet-root[data-action-state="sleep"] .cat-wrap {
+  transform: translateY(-15%) scale(0.75);
+}
+
+.pet-root[data-action-state="wash"] .cat-wrap {
+  transform: translateY(-32%) scale(0.7);
+}
+
+.pet-root[data-action-state="walk"] .cat-wrap,
+.pet-root[data-action-state="run"] .cat-wrap {
+  -webkit-app-region: no-drag;
+}
+
+.pet-root[data-walk-phase="exiting"] .cat-wrap {
+  opacity: 0;
+}
+
+.pet-root[data-walk-phase="entering"] .cat-wrap {
+  opacity: 1;
+}
+
+.pet-root[data-transitioning="true"] .cat-wrap {
+  opacity: 0.92;
+  filter: drop-shadow(0 10px 14px rgb(0 0 0 / 0.14)) saturate(1.04);
+}
+
+.debug-panel {
+  display: none;
+}
+
+.pet-actions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--pet-size, 280px);
+  height: var(--pet-size, 280px);
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+
+.pet-root:hover .pet-actions,
+.pet-actions:focus-within,
+.pet-actions:hover {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pet-root[data-actions-dismissed="true"] .pet-actions,
+.pet-root[data-actions-dismissed="true"] .pet-root:hover .pet-actions {
+  opacity: 0;
+  pointer-events: none;
+}
+
+[data-locked="true"] .pet-actions {
+  display: none;
+}
+
+.pet-action-button {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 0.42);
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  background: rgb(255 255 255 / 0.78);
+  box-shadow: 0 6px 16px rgb(15 23 42 / 0.12);
+  backdrop-filter: blur(10px) saturate(1.2);
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.pet-action-button[data-action="tracking"] {
+  display: none;
+}
+
+.pet-root[data-action-state]:not([data-action-state="tracking"]) .pet-action-button[data-action="tracking"] {
+  display: inline-flex;
+}
+
+.pet-action-button:hover {
+  background: rgb(255 255 255 / 0.94);
+  transform: scale(1.15);
+  box-shadow: 0 8px 20px rgb(15 23 42 / 0.18);
+}
+
+.pet-action-button:active {
+  transform: scale(0.9);
+}
+
+/* Circular positions around the 280px cat window */
+.pos-top           { top: 4px;   left: 50%;  transform: translate(-50%, 0); }
+.pos-top-right     { top: 18px;  right: 18px; }
+.pos-right         { top: 50%;   right: 4px;  transform: translate(0, -50%); }
+.pos-bottom-right  { bottom: 18px; right: 18px; }
+.pos-bottom        { bottom: 4px; left: 50%;  transform: translate(-50%, 0); }
+.pos-bottom-left   { bottom: 18px; left: 18px; }
+.pos-left          { top: 50%;   left: 4px;   transform: translate(0, -50%); }
+.pos-top-left      { top: 18px;  left: 18px; }
+
+.pos-top:hover,
+.pos-bottom:hover {
+  transform: translate(-50%, 0) scale(1.15);
+}
+.pos-left:hover,
+.pos-right:hover {
+  transform: translate(0, -50%) scale(1.15);
+}
+
+[data-mode="desktop"] .pet-root,
+[data-mode="desktop"] .pet-stage {
+  width: var(--pet-size, 280px);
+  height: var(--pet-size, 280px);
+  background: transparent;
+}
+
+[data-mode="desktop"] .cat-wrap {
+  filter: drop-shadow(0 12px 18px rgb(0 0 0 / 0.18));
+}
+
+[data-mode="preview"] {
+  min-width: 100vw;
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, rgb(230 234 238 / 0.72) 1px, transparent 1px),
+    linear-gradient(rgb(230 234 238 / 0.72) 1px, transparent 1px),
+    #f7f8fa;
+  background-size: 28px 28px;
+}
+
+[data-mode="preview"] .pet-root {
+  display: grid;
+  grid-template-columns: minmax(360px, 560px) 190px;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  min-height: 100vh;
+  padding: 28px;
+}
+
+[data-mode="preview"] .pet-stage {
+  width: min(72vmin, 560px);
+  height: min(72vmin, 560px);
+  border: 1px solid rgb(35 43 54 / 0.16);
+  background:
+    linear-gradient(45deg, #d7dce2 25%, transparent 25%),
+    linear-gradient(-45deg, #d7dce2 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #d7dce2 75%),
+    linear-gradient(-45deg, transparent 75%, #d7dce2 75%),
+    #ffffff;
+  background-position: 0 0, 0 14px, 14px -14px, -14px 0;
+  background-size: 28px 28px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+[data-mode="preview"] .cat-wrap,
+[data-mode="preview"] .cat-frame {
+  width: 100%;
+  height: 100%;
+}
+
+[data-mode="preview"] .cat-frame {
+  background-size: 1300% 1300%;
+}
+
+[data-mode="preview"] .debug-panel {
+  display: grid;
+  gap: 8px;
+  width: 190px;
+  padding: 12px;
+  border: 1px solid rgb(35 43 54 / 0.14);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 0.92);
+  box-shadow: 0 14px 40px rgb(31 36 46 / 0.08);
+}
+
+.debug-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 28px;
+  color: #526070;
+  font-size: 13px;
+}
+
+.debug-row strong {
+  color: #17202a;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 720px) {
+  [data-mode="preview"] .pet-root {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  [data-mode="preview"] .pet-stage {
+    width: min(88vw, 500px);
+    height: min(88vw, 500px);
+  }
+
+  [data-mode="preview"] .debug-panel {
+    width: min(88vw, 500px);
+  }
+}

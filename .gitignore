@@ -1,0 +1,23 @@
+node_modules/
+dist/
+
+# Build output except icons needed for packaging
+build/*
+!build/icon.icns
+!build/icon.png
+
+# Intermediate video processing artifacts (thousands of PNGs)
+*extracted_frames/
+public/assets/*transparent_frames/
+
+# Debug/validation images
+*_sheet.png
+*_key_check.png
+transparent_key_check.png
+
+# Source videos (large, download separately)
+*.mp4
+
+# OS / editor
+.DS_Store
+.claude/
